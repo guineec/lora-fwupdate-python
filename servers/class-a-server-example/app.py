@@ -19,6 +19,9 @@ api.register_callback_url('http://63.35.236.177/')
 # Ensure API Callbacks deregistered on exit
 atexit.register(api.deregister_callback_url)
 
+# Finally, start the update
+update.start_update()
+
 
 @app.route("/", methods=["GET"])
 def index():
