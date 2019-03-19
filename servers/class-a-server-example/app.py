@@ -2,6 +2,7 @@ import atexit
 from flask import Flask, jsonify, request
 from dass.api import ApiInstance
 from fwtransfer.fwtransfer import ClassBFWUpdate
+import base64
 
 app = Flask(__name__)
 api = ApiInstance("tcd_cianguinee", "cian1234")
@@ -30,8 +31,10 @@ def index():
 
 @app.route("/rest/callback/payloads/ul", methods=["POST"])
 def uplink():
-    json = request.get_json()
-    print(json)
+    uplink_contents = request.json["dataFrame"]
+    uplink_contents = base64.b16decode(uplink_contents).hex()
+    print(uplink_contents)
+    return ""
 
 
 if __name__=="__main__":
