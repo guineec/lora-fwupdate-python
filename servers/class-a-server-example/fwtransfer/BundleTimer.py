@@ -2,7 +2,7 @@ from threading import Timer
 
 
 class BundleTimer:
-    def __init__(self, timeout, timeout_callback):
+    def __init__(self, timeout_callback, timeout=120):
         self.callback = timeout_callback
         self.resend_pkts = []
         self.timeout = timeout

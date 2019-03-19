@@ -36,7 +36,7 @@ class ClassBFWUpdate(FWUpdateBase):
     def __init__(self, update_contents, dev_eui, api_instance, timeout, num_rx_windows=1):
         super(ClassBFWUpdate, self).__init__(update_contents, dev_eui, api_instance)
         self.nrx_windows = num_rx_windows
-        self.timer = BundleTimer(timeout, self.nack)
+        self.timer = BundleTimer(self.nack, timeout=timeout)
         self.expected_acks = []
 
     def __package_update(self):
@@ -88,7 +88,7 @@ class ClassBFWUpdate(FWUpdateBase):
         last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'
         # Start the timer for this downlink bundle
         self.timer.start()
-        for i in range(self.queue_pos, (self.queue_pos + self.nrx_windows + 1)):
+        for i in range(self.queue_pos, (self.queue_pos + self.nrx_windows)):
             # Make the segment packet
             opcode = last_opcode if i == self.queue_pos + self.nrx_windows else '0'
             seq_num = self.update_queue[i]["seq_num"]
