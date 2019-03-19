@@ -15,17 +15,21 @@ api.register_callback_url("http://63.35.236.177/")
 dev_eui = '70b3d599e0010262'
 update = ClassBFWUpdate(contents, dev_eui, api, 180, num_rx_windows=1)
 
+api.register_callback_url('http://63.35.236.177/')
 # Ensure API Callbacks deregistered on exit
 atexit.register(api.deregister_callback_url)
 
-update.start_update()
+
+@app.route("/", methods=["GET"])
+def index():
+    return jsonify({"hello": "world"})
 
 
 @app.route("/rest/callback/payloads/ul", methods=["POST"])
 def uplink():
-    print(dir(request.data))
+    print("UL " + str(dir(request)))
     return ""
 
 
 if __name__=="__main__":
-    app.run(port=80)
+    app.run(host="0.0.0.0", port=80)
