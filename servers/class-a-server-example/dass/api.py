@@ -113,6 +113,7 @@ class ApiInstance:
         return self.__put_request("pushmode", ["start"], body=body)
 
     def deregister_callback_url(self, app_id=None):
+        print("\nDEREGISTERING CALLBACK\n")
         params = ["stop"]
         if app_id is not None:
             params.append(app_id)

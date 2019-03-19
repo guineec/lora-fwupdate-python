@@ -1,5 +1,5 @@
 from fwtransfer.BundleTimer import BundleTimer
-
+from collections import defaultdict
 
 # Functions and classes for the designed protocol
 class FWUpdateBase:
@@ -14,7 +14,7 @@ class FWUpdateBase:
         self.update_contents = bytearray.fromhex(update_contents)
         self.device = dev_eui
         self.api = api_instance
-        self.update_segments = {}
+        self.update_segments = defaultdict()
         self.update_queue = []
         self.queue_pos = 0
 
@@ -53,7 +53,7 @@ class ClassBFWUpdate(FWUpdateBase):
                 firmware_segment = self.update_contents[seg_start:]
             else:
                 firmware_segment = self.update_contents[seg_start:seg_end]
-
+            self.update_segments[i] = {"data": None, "seq_num": None, "index": None}
             self.update_segments[i]['data'] = bytes(firmware_segment)
             self.update_segments[i]["seq_num"] = seq_num
             self.update_segments[i]["index"] = index
@@ -62,6 +62,7 @@ class ClassBFWUpdate(FWUpdateBase):
 
     def start_update(self):
         # Load the first m packets
+        self.__package_update()
         self.queue_pos = 0
         self.timer.start()
         last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'

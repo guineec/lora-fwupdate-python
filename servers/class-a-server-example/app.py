@@ -1,5 +1,5 @@
 import atexit
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from dass.api import ApiInstance
 from fwtransfer.fwtransfer import ClassBFWUpdate
 
@@ -16,6 +16,14 @@ update = ClassBFWUpdate(contents, dev_eui, api, 180, num_rx_windows=1)
 # Ensure API Callbacks deregistered on exit
 atexit.register(api.deregister_callback_url)
 
-@app.route("/ack", methods=["POST"])
-def ack():
-    # TODO
+update.start_update()
+
+
+@app.route("/rest/callback/payloads/ul", methods=["POST"])
+def uplink():
+    print(request.data)
+    return ""
+
+
+if __name__=="__main__":
+    app.run()
