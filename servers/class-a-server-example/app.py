@@ -32,7 +32,7 @@ def index():
 @app.route("/rest/callback/payloads/ul", methods=["POST"])
 def uplink():
     uplink_contents = request.json["dataFrame"]
-    uplink_contents = base64.b16decode(uplink_contents).hex()
+    uplink_contents = base64.b64decode(uplink_contents).hex()
     print(uplink_contents)
     return ""
 
