@@ -30,7 +30,7 @@ def index():
 
 @app.route("/rest/callback/payloads/ul", methods=["POST"])
 def uplink():
-    print("UL " + str(request.form))
+    print("UL " + str(request.values))
     return ""
 
 
