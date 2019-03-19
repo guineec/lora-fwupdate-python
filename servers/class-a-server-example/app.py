@@ -30,11 +30,8 @@ def index():
 
 @app.route("/rest/callback/payloads/ul", methods=["POST"])
 def uplink():
-    multi_dict = request.args
-    for key in multi_dict:
-        print(multi_dict.get(key))
-        print(multi_dict.getlist(key))
-    return ""
+    json = request.get_json()
+    print(json)
 
 
 if __name__=="__main__":
