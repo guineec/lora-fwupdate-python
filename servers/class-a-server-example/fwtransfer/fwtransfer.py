@@ -84,11 +84,10 @@ class ClassBFWUpdate(FWUpdateBase):
     def next(self):
         # Cancel the timer from the previous bundle, as there has been an UL
         self.timer.stop()
-        self.queue_pos = self.queue_pos + 1
         last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'
         # Start the timer for this downlink bundle
         self.timer.start()
-        for i in range(self.queue_pos, (self.queue_pos + self.nrx_windows)):
+        for i in range(self.queue_pos, (self.queue_pos + self.nrx_windows + 1)):
             # Make the segment packet
             opcode = last_opcode if i == self.queue_pos + self.nrx_windows else '0'
             seq_num = self.update_queue[i]["seq_num"]
