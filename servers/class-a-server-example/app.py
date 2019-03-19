@@ -33,7 +33,11 @@ def index():
 def uplink():
     uplink_contents = request.json["dataFrame"]
     uplink_contents = base64.b64decode(uplink_contents).hex()
-    print(uplink_contents)
+    if update.check_acks(uplink_contents):
+        update.next()
+        print("NEXT CALLED")
+    else:
+        print("UPDATE FINISHED")
     return ""
 
 

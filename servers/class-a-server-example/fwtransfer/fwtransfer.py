@@ -1,6 +1,7 @@
 from fwtransfer.BundleTimer import BundleTimer
 from collections import defaultdict
 
+
 # Functions and classes for the designed protocol
 class FWUpdateBase:
     """
@@ -24,7 +25,7 @@ class FWUpdateBase:
     def start_update(self):
         raise NotImplementedError("Abstract method 'FWUpdateBase.init_update' not implemented.")
 
-    def next(self, uplink_contents):
+    def next(self):
         raise NotImplementedError("Abstract method 'FWUpdateBase.next' not implemented.")
 
     def nack(self, index):
@@ -80,11 +81,9 @@ class ClassBFWUpdate(FWUpdateBase):
             self.api.send_downlink(self.device, packet)
             self.queue_pos += 1
 
-    def next(self, uplink_contents):
+    def next(self):
         # Cancel the timer from the previous bundle, as there has been an UL
         self.timer.stop()
-        # Reschedule missing acks
-        self.check_acks(uplink_contents)
         self.queue_pos = self.queue_pos + 1
         last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'
         # Start the timer for this downlink bundle
