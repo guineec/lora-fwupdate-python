@@ -32,10 +32,10 @@ class FWUpdateBase:
 
 
 class ClassBFWUpdate(FWUpdateBase):
-    def __init__(self, update_contents, dev_eui, api_instance, num_rx_windows=1):
+    def __init__(self, update_contents, dev_eui, api_instance, timeout, num_rx_windows=1):
         super(ClassBFWUpdate, self).__init__(update_contents, dev_eui, api_instance)
         self.nrx_windows = num_rx_windows
-        self.timer = BundleTimer(self.nack)
+        self.timer = BundleTimer(timeout, self.nack)
         self.expected_acks = []
 
     def __package_update(self):
@@ -63,7 +63,7 @@ class ClassBFWUpdate(FWUpdateBase):
     def start_update(self):
         # Load the first m packets
         self.queue_pos = 0
-        self.timer.start(self.queue_pos, self.queue_pos + self.nrx_windows)
+        self.timer.start()
         last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'
         for i in range(0, self.queue_pos + self.nrx_windows):
             # Make the segment packet
@@ -74,16 +74,19 @@ class ClassBFWUpdate(FWUpdateBase):
             preamble = bytearray.fromhex(header + index)
             packet_arr = preamble + self.update_queue[i]["data"]
             packet = bytes(packet_arr)
+            self.timer.resend_pkts.append(index)
             self.expected_acks.append(int(index))
             self.api.send_downlink(packet)
             self.queue_pos += 1
 
     def next(self, uplink_contents):
+        # Cancel the timer from the previous bundle, as there has been an UL
+        self.timer.stop()
         self.check_acks(uplink_contents)
         self.queue_pos = self.queue_pos + 1
         last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'
         # Start the timer for this downlink bundle
-        self.timer.start(self.queue_pos, self.queue_pos + self.nrx_windows)
+        self.timer.start()
         for i in range(self.queue_pos, (self.queue_pos + self.nrx_windows + 1)):
             # Make the segment packet
             opcode = last_opcode if i == self.queue_pos + self.nrx_windows else '0'
@@ -93,10 +96,12 @@ class ClassBFWUpdate(FWUpdateBase):
             preamble = bytearray.fromhex(header + index)
             packet_arr = preamble + self.update_queue[i]["data"]
             packet = bytes(packet_arr)
+            self.timer.resend_pkts.append(index)
             self.expected_acks.append(int(index))
             self.api.send_downlink(packet)
             self.queue_pos += 1
 
+    # Returns true or false, indicating that next does or does not need to be called
     def check_acks(self, uplink_contents):
         # Seq number not needed for now
         opcode = int(uplink_contents[0])
@@ -110,6 +115,11 @@ class ClassBFWUpdate(FWUpdateBase):
 
         for ind in unacked:
             self.nack(ind)
+
+        if len(unacked) == 0 and opcode == 1:
+            return False
+        else:
+            return True
 
     def nack(self, index):
         self.update_queue.append(self.update_segments[index])

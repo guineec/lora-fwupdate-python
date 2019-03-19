@@ -1,11 +1,25 @@
+from threading import Timer
+
+
 class BundleTimer:
-    def __init__(self, timeout_callback):
+    def __init__(self, timeout, timeout_callback):
         self.callback = timeout_callback
-        self.ind_start = 0
-        self.ind_end = 0
+        self.resend_pkts = []
+        self.timeout = timeout
+        self.timer = None
 
+    def __on_timeout(self):
+        print("TIMEOUT")
+        for index in self.resend_pkts:
+            print("NACKING " + str(index))
+            self.callback(index)
+        self.resend_pkts = []
 
-    def start(self, queue_start, queue_end):
-        self.ind_start = queue_start
-        self.ind_end = queue_end
+    def start(self):
+        self.timer = Timer(self.timeout, self.__on_timeout)
 
+    def stop(self):
+        if self.timer is not None:
+            self.timer.cancel()
+            self.timer = None
+        self.resend_pkts = []
