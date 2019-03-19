@@ -77,12 +77,13 @@ class ClassBFWUpdate(FWUpdateBase):
             packet = bytes(packet_arr)
             self.timer.resend_pkts.append(index)
             self.expected_acks.append(int(index))
-            self.api.send_downlink(packet)
+            self.api.send_downlink(self.device, packet)
             self.queue_pos += 1
 
     def next(self, uplink_contents):
         # Cancel the timer from the previous bundle, as there has been an UL
         self.timer.stop()
+        # Reschedule missing acks
         self.check_acks(uplink_contents)
         self.queue_pos = self.queue_pos + 1
         last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'
@@ -99,7 +100,7 @@ class ClassBFWUpdate(FWUpdateBase):
             packet = bytes(packet_arr)
             self.timer.resend_pkts.append(index)
             self.expected_acks.append(int(index))
-            self.api.send_downlink(packet)
+            self.api.send_downlink(self.device, packet)
             self.queue_pos += 1
 
     # Returns true or false, indicating that next does or does not need to be called
