@@ -112,7 +112,7 @@ class KPAdaptedClassB(FWUpdateBase):
             rcvd_acks.append(int(ind))
 
         print(rcvd_acks, self.expected_acks)
-
+        unacked = []
         if not len(rcvd_acks) == 0:
             unacked = list(set(self.expected_acks) - set(rcvd_acks))
             self.expected_acks = []
