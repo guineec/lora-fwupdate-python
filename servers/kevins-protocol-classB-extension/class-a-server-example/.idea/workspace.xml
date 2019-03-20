@@ -12,7 +12,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="505">
@@ -24,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="100" column="106" selection-start-line="100" selection-start-column="106" selection-end-line="100" selection-end-column="106" />
+            <state relative-caret-position="112">
+              <caret line="91" column="18" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
@@ -78,8 +78,8 @@
         <option value="$PROJECT_DIR$/dass/api.py" />
         <option value="$PROJECT_DIR$/fwtransfer/BundleTimer.py" />
         <option value="$PROJECT_DIR$/update_contents.hex" />
-        <option value="$PROJECT_DIR$/fwtransfer/fwtransfer.py" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/fwtransfer/fwtransfer.py" />
       </list>
     </option>
   </component>
@@ -198,7 +198,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fwtransfer/fwtransfer.py</url>
-          <line>85</line>
+          <line>86</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -256,22 +256,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="100" column="106" selection-start-line="100" selection-start-column="106" selection-end-line="100" selection-end-column="106" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="505">
           <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="91" column="18" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
           </folding>
         </state>
       </provider>

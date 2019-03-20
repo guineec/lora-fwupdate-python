@@ -38,6 +38,7 @@ class KPAdaptedClassB(FWUpdateBase):
         self.nrx_windows = num_rx_windows
         self.timer = BundleTimer(self.nack, timeout=timeout)
         self.expected_acks = []
+        self.acks_rcvd = set()
 
     def __package_update(self):
         num_packets = len(self.update_contents) / 48
@@ -88,19 +89,20 @@ class KPAdaptedClassB(FWUpdateBase):
         # Start the timer for this downlink bundle
         self.timer.start()
         for i in range(self.queue_pos, (self.queue_pos + self.nrx_windows)):
-            # Make the segment packet
-            opcode = last_opcode if i == len(self.update_queue) - 1 else '0'
-            seq_num = self.update_queue[i]["seq_num"]
-            index = self.update_queue[i]["index"]
-            header = opcode + seq_num
-            preamble = bytearray.fromhex(header + index)
-            packet_arr = preamble + self.update_queue[i]["data"]
-            packet = bytes(packet_arr)
-            self.timer.resend_pkts.append(index)
-            self.expected_acks.append(
-                int(self.update_queue[self.queue_pos - 1]["index"], 16)) if not self.queue_pos == 0 else 0
-            self.api.send_downlink(self.device, packet)
-            self.queue_pos += 1
+            if i < len(self.update_queue):
+                # Make the segment packet
+                opcode = last_opcode if i == len(self.update_queue) - 1 else '0'
+                seq_num = self.update_queue[i]["seq_num"]
+                index = self.update_queue[i]["index"]
+                header = opcode + seq_num
+                preamble = bytearray.fromhex(header + index)
+                packet_arr = preamble + self.update_queue[i]["data"]
+                packet = bytes(packet_arr)
+                self.timer.resend_pkts.append(index)
+                self.expected_acks.append(
+                    int(self.update_queue[self.queue_pos - 1]["index"], 16)) if not self.queue_pos == 0 else 0
+                self.api.send_downlink(self.device, packet)
+                self.queue_pos += 1
 
     # Returns true or false, indicating that next does or does not need to be called
     def check_acks(self, uplink_contents):
@@ -111,6 +113,7 @@ class KPAdaptedClassB(FWUpdateBase):
         rcvd_acks = []
         for ind in data:
             rcvd_acks.append(int(ind))
+            self.acks_rcvd.add(ind)
 
         print(rcvd_acks, self.expected_acks)
         unacked = []
@@ -119,7 +122,8 @@ class KPAdaptedClassB(FWUpdateBase):
             self.expected_acks = []
 
             for ind in unacked:
-                self.nack(ind)
+                if ind not in self.acks_rcvd:
+                    self.nack(ind)
 
         if len(unacked) == 0 and opcode == 1:
             return False
