@@ -16,7 +16,7 @@ api.register_callback_url("http://63.35.236.177/")
 dev_eui = '70b3d599e0010262'
 update = KPAdaptedClassB(contents, dev_eui, api, 180, num_rx_windows=1)
 
-api.register_callback_url('http://63.35.236.177/')
+api.register_callback_url('http://34.240.71.240/')
 # Ensure API Callbacks deregistered on exit
 atexit.register(api.deregister_callback_url)
 
