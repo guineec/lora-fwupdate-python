@@ -124,3 +124,4 @@ class KPAdaptedClassB(FWUpdateBase):
     def nack(self, index):
         print("---X NACK: %s X---" % index)
         self.update_queue.append(self.update_segments[index])
+        print(self.update_queue)
