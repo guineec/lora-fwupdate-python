@@ -111,12 +111,12 @@ class KPAdaptedClassB(FWUpdateBase):
             rcvd_acks.append(int(ind))
 
         print(rcvd_acks, self.expected_acks)
-
         unacked = list(set(self.expected_acks) - set(rcvd_acks))
-        self.expected_acks = []
+        if not len(rcvd_acks) == 0:
+            self.expected_acks = []
 
-        for ind in unacked:
-            self.nack(ind)
+            for ind in unacked:
+                self.nack(ind)
 
         if len(unacked) == 0 and opcode == 1:
             return False
