@@ -10,7 +10,7 @@ update_length = None
 
 try:
     update_length = int(sys.argv[1])
-except Exception:
+except IndexError as e:
     print("USING FULL UPDATE")
 
 app = Flask(__name__)
