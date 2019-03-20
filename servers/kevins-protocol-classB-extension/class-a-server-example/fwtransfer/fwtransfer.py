@@ -106,6 +106,7 @@ class KPAdaptedClassB(FWUpdateBase):
         # Seq number not needed for now
         opcode = int(uplink_contents[0])
         data = bytearray.fromhex(uplink_contents)[2:]
+        print(data)
         rcvd_acks = []
         for ind in data:
             rcvd_acks.append(int(ind))
@@ -125,4 +126,6 @@ class KPAdaptedClassB(FWUpdateBase):
 
     def nack(self, index):
         print("---X NACK: %s X---" % index)
+        # Add it to reschedule queue
+        self.update_queue.append(self.update_segments[index])
         print(self.update_queue)
