@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="80341152-50ab-4017-9edf-2f94d2fd2aa8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-a-device/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-a-device/node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="79" column="12" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="49" />
+            <state relative-caret-position="374">
+              <caret line="116" column="68" selection-start-line="116" selection-start-column="68" selection-end-line="116" selection-end-column="68" />
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
@@ -253,8 +252,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="79" column="12" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="49" />
+        <state relative-caret-position="374">
+          <caret line="116" column="68" selection-start-line="116" selection-start-column="68" selection-end-line="116" selection-end-column="68" />
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>

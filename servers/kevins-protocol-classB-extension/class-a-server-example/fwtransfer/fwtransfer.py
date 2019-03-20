@@ -89,7 +89,7 @@ class KPAdaptedClassB(FWUpdateBase):
         self.timer.start()
         for i in range(self.queue_pos, (self.queue_pos + self.nrx_windows)):
             # Make the segment packet
-            opcode = last_opcode if i == len(self.update_queue) - 1 else '0'  # TODO TEST
+            opcode = last_opcode if i == len(self.update_queue) - 1 else '0'
             seq_num = self.update_queue[i]["seq_num"]
             index = self.update_queue[i]["index"]
             header = opcode + seq_num
@@ -112,8 +112,9 @@ class KPAdaptedClassB(FWUpdateBase):
             rcvd_acks.append(int(ind))
 
         print(rcvd_acks, self.expected_acks)
-        unacked = list(set(self.expected_acks) - set(rcvd_acks))
+
         if not len(rcvd_acks) == 0:
+            unacked = list(set(self.expected_acks) - set(rcvd_acks))
             self.expected_acks = []
 
             for ind in unacked:
