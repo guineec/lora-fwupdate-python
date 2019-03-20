@@ -97,7 +97,8 @@ class KPAdaptedClassB(FWUpdateBase):
             packet_arr = preamble + self.update_queue[i]["data"]
             packet = bytes(packet_arr)
             self.timer.resend_pkts.append(index)
-            self.expected_acks.append(int(index, 16) - 1) if not index == 0 else 0
+            self.expected_acks.append(
+                int(self.update_queue[self.queue_pos - 1]["index"], 16)) if not self.queue_pos == 0 else 0
             self.api.send_downlink(self.device, packet)
             self.queue_pos += 1
 
