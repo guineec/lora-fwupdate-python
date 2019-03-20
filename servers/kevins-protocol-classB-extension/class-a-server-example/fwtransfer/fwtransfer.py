@@ -103,6 +103,7 @@ class KPAdaptedClassB(FWUpdateBase):
 
     # Returns true or false, indicating that next does or does not need to be called
     def check_acks(self, uplink_contents):
+        print(uplink_contents["dataFrame"])
         # Seq number not needed for now
         opcode = int(uplink_contents[0])
         data = bytearray.fromhex(uplink_contents)[2:]
@@ -125,5 +126,4 @@ class KPAdaptedClassB(FWUpdateBase):
 
     def nack(self, index):
         print("---X NACK: %s X---" % index)
-        self.update_queue.append(self.update_segments[index])
         print(self.update_queue)
