@@ -20,7 +20,7 @@ atexit.register(api.deregister_callback_url)
 
 # Finally, start the update
 update.start_update()
-
+# update.next()
 
 @app.route("/", methods=["GET"])
 def index():
