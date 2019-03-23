@@ -49,7 +49,7 @@ class KPAClassADevice:
                     ul_data += ind
                 res = requests.post(self.url + "/uplink", data=json.dumps({"hex": ul_data}))
             self.ack_queue = []
-
+            time.sleep(random.randint(1, 15))  # Simulate a transfer time with some randomness
             res_bytes = res.content
             hex_str = res_bytes.hex()
             new_opcode = hex_str[0]

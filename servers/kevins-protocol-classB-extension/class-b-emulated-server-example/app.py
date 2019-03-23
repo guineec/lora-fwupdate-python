@@ -32,7 +32,8 @@ def on_uplink():
     uplink_contents = uplink_data["hex"]
     if uplink_contents == "0000":
         pkts_as_bytearr = update.start_update()
-        return bytes(pkts_as_bytearr)
+        bytes_to_send = bytes(pkts_as_bytearr)
+        return Response(bytes_to_send, mimetype="application/octet-stream")
     else:
         if update.check_acks(uplink_contents):
             pkts_as_bytearr = update.next()

@@ -45,21 +45,34 @@ class KPAClassBDevice:
         else:
             ul_data = self.last_downlink["opcode"] + self.last_downlink["seq_num"]
             for ind in self.ack_queue:
-                ul_data += ind
+                ul_data += str(hex(ind))[2:].zfill(2)
             res = requests.post(self.url + "/uplink", data=json.dumps({"hex": ul_data}))
         self.ack_queue = []
-
-        # Need to process the pkts better - get the hexstring as a byte arr and loop through individual packets
-        res_bytes = res.content
-        hex_str = res_bytes.encode('hex')
-        new_opcode = hex_str[0]
+        hex_str = res.content.encode('hex')
+        hex_bytes = bytearray.fromhex(hex_str)
         new_seq_num = hex_str[1:4]
-        indices_str = hex_str[4:]
+        new_opcode = ""
         indices = []
-        print(new_opcode)
-        for i in range(0, len(indices_str), 2):
-            if random.randint(0, 100) > self.drop_chance:
-                indices.append(indices_str[i:i + 2])
+        for i in range(0, len(hex_bytes), 50):
+            time.sleep(random.randint(0, 8))  # Random transmission delay simulated
+            if i + 50 >= len(hex_bytes) - 1:
+                pkt = hex_bytes[i:]
+                pkt_hex = hex_str[(i * 2):]
+                new_opcode = pkt_hex[0]
+                number = random.randint(1, 100)
+                # Drop packets based on SF
+                if number > self.drop_chance:
+                    indices.append(pkt[2])
+                else:
+                    self.dropped_packets += 1
+            else:
+                byte = hex_bytes[i:i + 50]
+                # Drop packets based on SF
+                number = random.randint(1, 100)
+                if number > self.drop_chance:
+                    indices.append(byte[2])
+                else:
+                    self.dropped_packets += 1
         self.ack_queue = indices
         self.last_downlink = {"opcode": new_opcode, "seq_num": new_seq_num, "index": indices}
         return new_opcode is "1"
@@ -72,13 +85,13 @@ class KPAClassBDevice:
         is_start = True
         while True:
             if not is_start:
-                time.sleep(1 * self.nrx_windows)
+                time.sleep(60 * self.nrx_windows)  # TODO change back to 60 * nrx_windows
             is_start = False
             finished = self.uplink()
             if finished:
                 ul_data = self.last_downlink["opcode"] + self.last_downlink["seq_num"]
                 for ind in self.ack_queue:
-                    ul_data += ind
+                    ul_data += str(hex(ind))[2:].zfill(2)
                 requests.post(self.url + "/uplink", data=json.dumps({"hex": ul_data}))
                 end_time = time.asctime(time.localtime(time.time()))
                 print(" END TIME: " + end_time)
@@ -88,5 +101,5 @@ class KPAClassBDevice:
                 print("|---- UPDATE COMPLETE ----|")
 
 
-dev = KPAClassBDevice("http://localhost:5001", spreading_factor=12)
+dev = KPAClassBDevice("http://localhost:5001", spreading_factor=12, nrx_windows=20)
 dev.run()

@@ -68,12 +68,11 @@ class KPAdaptedClassB:
         packets = bytearray()
         self.__package_update()
         self.queue_pos = 0
-        last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'
-        limit = len(self.update_queue) if self.queue_pos + self.nrx_windows > len(
-            self.update_queue) else self.queue_pos + self.nrx_windows
+        limit = len(self.update_queue) if self.queue_pos + self.nrx_windows >= len(
+            self.update_queue) - 1 else self.queue_pos + self.nrx_windows + 1
         for i in range(0, limit):
             # Make the segment packet
-            opcode = last_opcode if i == (limit - 1) else '0'
+            opcode = '1' if (i == limit - 1) and (self.queue_pos == (len(self.update_queue) - 1)) else '0'
             seq_num = self.update_queue[i]["seq_num"]
             index = self.update_queue[i]["index"]
             header = opcode + seq_num
@@ -86,7 +85,7 @@ class KPAdaptedClassB:
 
     def next(self):
         packets = bytearray()
-        last_opcode = '1' if self.queue_pos >= (len(self.update_queue) - 1) else '0'
+        last_opcode = '1' if self.queue_pos + self.nrx_windows >= (len(self.update_queue) - 1) else '0'
         for i in range(self.queue_pos, (self.queue_pos + self.nrx_windows)):
             if i < len(self.update_queue):
                 # Make the segment packet
@@ -105,7 +104,7 @@ class KPAdaptedClassB:
     # Returns true or false, indicating that next does or does not need to be called
     def check_acks(self, uplink_contents):
         # Seq number not needed for now
-        opcode = int(uplink_contents[0])
+        opcode = int(uplink_contents[0], 16) if len(uplink_contents) > 1 else 1
         data = bytearray.fromhex(uplink_contents)[2:]
         print(data)
         rcvd_acks = []
