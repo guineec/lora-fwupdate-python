@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a1242dc0-4c20-4252-9d67-9255840492d9" name="Default Changelist" comment="">
+    <list default="true" id="e5d37757-35a8-4218-bf13-f3f7216c8245" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-a-device/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-a-device/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-b-device/.idea/class-b-device.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-b-device/.idea/class-b-device.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-b-device/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-b-device/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-b-device/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-b-device/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-b-device/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../device-emulation/kevins-protocol-classB-extension/class-b-device/node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../class-a-emulated-server-example/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../class-a-emulated-server-example/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,21 +17,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-35">
-              <caret line="97" column="56" selection-start-line="97" selection-start-column="56" selection-end-line="97" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+            <state relative-caret-position="423">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -37,63 +31,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.local/share/virtualenvs/class-a-server-example/lib/python3.7/site-packages/flask/app.py">
+        <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="2308" selection-start-line="2308" selection-end-line="2308" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.local/share/virtualenvs/class-a-server-example/lib/python3.7/site-packages/werkzeug/serving.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="292" selection-start-line="292" selection-end-line="292" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socketserver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="649" selection-start-line="649" selection-end-line="649" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="864" selection-start-line="864" selection-end-line="864" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/server.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="425" selection-start-line="425" selection-end-line="425" />
+            <state relative-caret-position="146">
+              <caret line="75" column="52" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>timer</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
@@ -101,12 +47,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/fwtransfer/fwtransfer.py" />
+        <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1680" />
     <option name="height" value="1050" />
   </component>
@@ -121,8 +67,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="class-a-emulated-server-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="class-a-emulated-server-example" type="462c0819:PsiDirectoryNode" />
+              <item name="class-b-emulated-server-example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="class-b-emulated-server-example" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -145,36 +91,15 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Full">
-    <configuration name="240" type="PythonConfigurationType" factoryName="Python">
-      <module name="class-a-emulated-server-example" />
+  <component name="RunManager">
+    <configuration name="full" type="PythonConfigurationType" factoryName="Python">
+      <module name="class-b-emulated-server-example" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="$USER_HOME$/.virtualenvs/class-a-server-example/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
-      <option name="PARAMETERS" value="240" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Full" type="PythonConfigurationType" factoryName="Python">
-      <module name="class-a-emulated-server-example" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$USER_HOME$/.virtualenvs/class-a-server-example/bin/python" />
+      <option name="SDK_HOME" value="$USER_HOME$/.virtualenvs/class-b-emulated-server-example/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -188,21 +113,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.240" />
-      <item itemvalue="Python.Full" />
-    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a1242dc0-4c20-4252-9d67-9255840492d9" name="Default Changelist" comment="" />
-      <created>1553191101784</created>
+      <changelist id="e5d37757-35a8-4218-bf13-f3f7216c8245" name="Default Changelist" comment="" />
+      <created>1553291492048</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1553191101784</updated>
+      <updated>1553291492048</updated>
     </task>
     <servers />
   </component>
@@ -210,20 +131,20 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Favorites" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24954791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5346939" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31428573" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32959184" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -234,32 +155,31 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/fwtransfer/fwtransfer.py</url>
-          <line>67</line>
-          <option name="timeStamp" value="4" />
+          <line>29</line>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/fwtransfer/BundleTimer.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/.local/share/virtualenvs/class-a-server-example/lib/python3.7/site-packages/flask/app.py">
+    <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="2308" selection-start-line="2308" selection-end-line="2308" />
+        <state relative-caret-position="146">
+          <caret line="75" column="52" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.local/share/virtualenvs/class-a-server-example/lib/python3.7/site-packages/werkzeug/serving.py">
+    <entry file="file://$USER_HOME$/.local/share/virtualenvs/class-b-emulated-server-example/lib/python3.7/site-packages/flask/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="292" selection-start-line="292" selection-end-line="292" />
+          <caret line="1798" selection-start-line="1798" selection-end-line="1798" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.local/share/virtualenvs/class-b-emulated-server-example/lib/python3.7/site-packages/werkzeug/serving.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="359" selection-start-line="359" selection-end-line="359" />
         </state>
       </provider>
     </entry>
@@ -284,17 +204,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fwtransfer/fwtransfer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-35">
-          <caret line="97" column="56" selection-start-line="97" selection-start-column="56" selection-end-line="97" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+        <state relative-caret-position="423">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
