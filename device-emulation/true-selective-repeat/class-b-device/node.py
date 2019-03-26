@@ -55,7 +55,7 @@ class TSRClassBDevice:
         indices = []
         self.packets.sort()
         for i in range(0, len(hex_bytes), 50):
-            time.sleep(random.randint(0, 8))  # Random transmission delay simulated
+            # time.sleep(random.randint(0, 8))  # Random transmission delay simulated
             if i + 50 >= len(hex_bytes) - 1:
                 pkt = hex_bytes[i:]
                 pkt_hex = hex_str[(i * 2):]
@@ -87,8 +87,9 @@ class TSRClassBDevice:
         print(" SF:       " + str(self.drop_chance) + "% drop likelihood")
         is_start = True
         while True:
-            if not is_start:
-                time.sleep(2 * self.nrx_windows)
+            print("PKTS: %s" % self.packets)
+            # if not is_start:
+            #     time.sleep(2 * self.nrx_windows)
             is_start = False
             finished = self.uplink()
             if finished:

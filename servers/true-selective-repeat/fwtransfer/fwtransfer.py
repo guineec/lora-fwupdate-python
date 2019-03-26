@@ -43,6 +43,7 @@ class TrueSelectiveRepeat:
         self.queue_pos = 0
         self.tx_total = 0
         self.pkts_sent = 0
+        self.retransmits = 0
         self.seq_sent = 0
 
     def __package_update(self):
@@ -97,7 +98,7 @@ class TrueSelectiveRepeat:
                 # Ensure not out of range
                 if not (self.is_last() and c >= len(list(self.send_queue))):
                     # Make seg packet
-                    opcode = '1' if self.is_last() and i == len(self.send_queue) - 1 else '0'
+                    opcode = '1' if self.is_last() and c == len(self.send_queue) - 1 else '0'
 
                     seq_num = str(hex(self.seq_sent))[2:].zfill(3)
                     index = i["index"]
@@ -140,6 +141,7 @@ class TrueSelectiveRepeat:
             for ind in unacked:
                 if ind not in self.acks_rcvd:
                     print("----X NACK %s X----" % ind)
+                    self.retransmits += 1
                     self.send_queue.append(self.update_segments[ind])
 
         unacked.sort()
@@ -161,4 +163,5 @@ class TrueSelectiveRepeat:
             return True
 
     def is_last(self):
-        return len(self.update_segments) - len(list(self.acks_rcvd)) <= self.nrx_windows
+        last = len(self.update_segments) - len(list(self.acks_rcvd)) <= self.nrx_windows
+        return last
