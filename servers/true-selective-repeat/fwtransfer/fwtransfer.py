@@ -41,6 +41,8 @@ class TrueSelectiveRepeat:
         self.send_queue = []
         self.update_contents = bytearray.fromhex(update_contents)
         self.queue_pos = 0
+        self.tx_total = 0
+        self.pkts_sent = 0
         self.seq_sent = 0
 
     def __package_update(self):
@@ -58,7 +60,7 @@ class TrueSelectiveRepeat:
                 firmware_segment = self.update_contents[seg_start:]
             else:
                 firmware_segment = self.update_contents[seg_start:seg_end]
-            self.update_segments[i] = {"data": None, "seq_num": None, "index": None}
+            self.update_segments.append({"data": None, "seq_num": None, "index": None})
             self.update_segments[i]['data'] = bytes(firmware_segment)
             self.update_segments[i]["seq_num"] = seq_num
             self.update_segments[i]["index"] = index
@@ -70,67 +72,93 @@ class TrueSelectiveRepeat:
         self.queue_pos = 0
         self.seq_sent = 0
         for i in range(0, self.nrx_windows):
-            # Make the segment packet
-            opcode = '1' if (i == self.nrx_windows - 1) and (self.queue_pos == (len(self.update_segments) - 1)) else '0'
-            seq_num = hex(int(self.seq_sent / self.nrx_windows))
-            index = self.update_segments[i]["index"]
-            header = opcode + seq_num
-            preamble = bytearray.fromhex(header + index)
-            packet_arr = preamble + self.update_segments[i]["data"]
-            packets += packet_arr
-            self.expected_acks.append(int(index, 16))
+            # Ensure not out of range
+            if not (self.is_last() and i >= len(self.send_queue)):
+                # Make the segment packet
+                opcode = '1' if self.is_last() and i == len(self.send_queue) - 1 else '0'
+                seq_num = '000'
+                index = self.update_segments[i]["index"]
+                header = opcode + seq_num
+                preamble = bytearray.fromhex(str(header) + str(index))
+                packet_arr = preamble + self.update_segments[i]["data"]
+                packets += packet_arr
+                self.pkts_sent += 1
+                self.expected_acks.append(int(index, 16))
         self.seq_sent += 1
+        self.tx_total += 1
+        print(packets)
         return packets
 
     def next(self):
-        packets = bytearray()
-        for i in self.send_queue:
-            # Make seg packet
-            opcode = '1' if i["index"] == self.window[-1] is self.update_segments[-1] and i == len(
-                self.send_queue) - 1 else '0'
+        if not self.queue_pos == -1:
+            self.seq_sent += 1
+            packets = bytearray()
+            for c, i in enumerate(self.send_queue):
+                # Ensure not out of range
+                if not (self.is_last() and c >= len(list(self.send_queue))):
+                    # Make seg packet
+                    opcode = '1' if self.is_last() and i == len(self.send_queue) - 1 else '0'
 
-            seq_num = hex(int(self.seq_sent / self.nrx_windows))
-            index = i["index"]
-            header = opcode + seq_num
-            preamble = bytearray.fromhex(header + index)
-            packet_arr = preamble + i["data"]
-            packets += packet_arr
-            self.expected_acks.append(int(index, 16))
-        self.seq_sent += 1
-        self.send_queue = []
-        return packets
+                    seq_num = str(hex(self.seq_sent))[2:].zfill(3)
+                    index = i["index"]
+                    header = opcode + seq_num
+                    preamble = bytearray.fromhex(header + index)
+                    packet_arr = preamble + i["data"]
+                    packets += packet_arr
+                    self.expected_acks.append(int(index, 16))
+                    self.pkts_sent += 1
+            self.seq_sent += 1
+            self.tx_total += 1
+            self.send_queue = []
+            return packets
+        else:
+            return []
 
     # Returns true or false, indicating that next does or does not need to be called
     def check_acks(self, uplink_contents):
+        if self.queue_pos == -1:
+            return False
         # Seq number not needed for now
         opcode = int(uplink_contents[0], 16) if len(uplink_contents) > 1 else 1
         data = bytearray.fromhex(uplink_contents)[2:]
         rcvd_acks = []
-        movements = 0
         for ind in data:
             rcvd_acks.append(int(ind))
             self.acks_rcvd.add(ind)
-            if ind == self.queue_pos:
-                self.queue_pos += 1
-                movements += 1
 
         self.window = self.update_segments[self.queue_pos:self.queue_pos + self.nrx_windows]
 
         unacked = []
         print(rcvd_acks, self.expected_acks)
+        exp = self.expected_acks
+        exp.sort()
         if not len(rcvd_acks) == 0:
             unacked = list(set(self.expected_acks) - set(rcvd_acks))
-            self.expected_acks = unacked
+            self.expected_acks = []
             print(unacked)
 
             for ind in unacked:
                 if ind not in self.acks_rcvd:
-                    print("----X NACK %s X----", ind)
-                    self.send_queue.append(ind)
+                    print("----X NACK %s X----" % ind)
+                    self.send_queue.append(self.update_segments[ind])
 
-        self.send_queue.append(self.window[-movements:])
+        unacked.sort()
+        if len(unacked) > 0:
+            self.queue_pos = unacked[0]
+        elif len(exp) > 0:
+            self.queue_pos = exp[-1] + 1
+        else:
+            self.queue_pos = -1
+        self.send_queue += self.update_segments[self.queue_pos:self.queue_pos + self.nrx_windows]
+        send_queue_list = [int(v["index"], 16) for v in self.send_queue]
+        self.send_queue = list(set(send_queue_list) - self.acks_rcvd)
+        self.send_queue.sort()
+        self.send_queue = [self.update_segments[i] for i in self.send_queue]
 
         if len(unacked) == 0 and opcode == 1:
             return False
         else:
             return True
+
+    def is_last(self):
+        return len(self.update_segments) - len(list(self.acks_rcvd)) <= self.nrx_windows

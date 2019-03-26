@@ -9,7 +9,7 @@ class InvalidSpreadingFactorException(Exception):
 
 
 # Kevin's Protocol Adapted
-class KPAClassBDevice:
+class TSRClassBDevice:
     def __init__(self, url, spreading_factor=12, nrx_windows=20):
         self.start_time = 0
         self.end_time = 0
@@ -53,6 +53,7 @@ class KPAClassBDevice:
         new_seq_num = hex_str[1:4]
         new_opcode = ""
         indices = []
+        self.packets.sort()
         for i in range(0, len(hex_bytes), 50):
             time.sleep(random.randint(0, 8))  # Random transmission delay simulated
             if i + 50 >= len(hex_bytes) - 1:
@@ -63,14 +64,16 @@ class KPAClassBDevice:
                 # Drop packets based on SF
                 if number > self.drop_chance:
                     indices.append(pkt[2])
+                    self.packets.append(pkt[2])
                 else:
                     self.dropped_packets += 1
             else:
-                byte = hex_bytes[i:i + 50]
+                seq = hex_bytes[i:i + 50]
                 # Drop packets based on SF
                 number = random.randint(1, 100)
                 if number > self.drop_chance:
-                    indices.append(byte[2])
+                    indices.append(seq[2])
+                    self.packets.append(seq[2])
                 else:
                     self.dropped_packets += 1
         self.ack_queue = indices
@@ -85,7 +88,7 @@ class KPAClassBDevice:
         is_start = True
         while True:
             if not is_start:
-                time.sleep(60 * self.nrx_windows)
+                time.sleep(2 * self.nrx_windows)
             is_start = False
             finished = self.uplink()
             if finished:
@@ -101,5 +104,5 @@ class KPAClassBDevice:
                 print("|---- UPDATE COMPLETE ----|")
 
 
-dev = KPAClassBDevice("http://localhost:5001", spreading_factor=12, nrx_windows=20)
+dev = TSRClassBDevice("http://localhost:5002", spreading_factor=12, nrx_windows=20)
 dev.run()

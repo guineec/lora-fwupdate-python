@@ -44,15 +44,14 @@ def on_uplink():
             end_time = time.asctime(time.localtime(time.time()))
             print("Started: " + start_time)
             print("Ended: " + end_time)
-            transmitted_total = len(update.update_queue)
-            retransmits = transmitted_total - len(update.update_segments)
-            print("Transmitted: " + str(transmitted_total) + " packets in total.")
+            retransmits = update.tx_total - (int(len(update.update_segments) / 20) - 1)
+            print("Transmitted: " + str(update.tx_total) + " packets in total.")
             print("Retransmits: " + str(retransmits) + " packets.")
-            print("Total packet loss percentage: " + str((retransmits / transmitted_total) * 100) + "%")
+            print("Total packet loss percentage: " + str((retransmits / update.pkts_sent) * 100) + "%")
             print("Ineffective uplinks: " + str(retransmits + 1))  # First uplink is always ineffective
             print("|-------------------------------------------------|")
             return ""
 
 
 if __name__ == "__main__":
-    app.run("localhost", port=5001)
+    app.run("localhost", port=5002)
