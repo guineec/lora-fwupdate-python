@@ -21,7 +21,7 @@ with open('update_contents.hex') as f:
     if update_length is not None:
         contents = contents[:update_length * 2]
 
-update = KPAdaptedClassB(contents, num_rx_windows=20)
+update = KPAdaptedClassB(contents, num_rx_windows=5)
 start_time = time.asctime(time.localtime(time.time()))
 
 

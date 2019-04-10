@@ -1,4 +1,5 @@
 from collections import defaultdict
+from fwtransfer.logger import Logger
 
 
 # Functions and classes for the designed protocol
@@ -32,7 +33,7 @@ class FWUpdateBase:
 
 
 class KPAdaptedClassB:
-    def __init__(self, update_contents, num_rx_windows=1):
+    def __init__(self, update_contents, num_rx_windows=1, logger_file="test.json"):
         self.nrx_windows = num_rx_windows
         self.expected_acks = []
         self.acks_rcvd = set()
@@ -40,6 +41,7 @@ class KPAdaptedClassB:
         self.update_queue = []
         self.update_contents = bytearray.fromhex(update_contents)
         self.queue_pos = 0
+        self.logger = Logger(output=logger_file)
 
     def __package_update(self):
         num_packets = len(self.update_contents) / 48
@@ -80,6 +82,8 @@ class KPAdaptedClassB:
             packets += packet_arr
             self.expected_acks.append(int(index))
             self.queue_pos += 1
+            self.logger.ratio_up()
+        self.logger.effective_uplink()
         return packets
 
     def next(self):
@@ -98,6 +102,8 @@ class KPAdaptedClassB:
                     int(self.update_queue[self.queue_pos]["index"], 16)) if not self.queue_pos == 0 else 0
                 packets += packet_arr
                 self.queue_pos += 1
+                self.logger.ratio_up()
+        self.logger.effective_uplink()
         return packets
 
     # Returns true or false, indicating that next does or does not need to be called
@@ -120,9 +126,13 @@ class KPAdaptedClassB:
 
             for ind in unacked:
                 if ind not in self.acks_rcvd:
+                    self.logger.ratio_down()
                     self.nack(ind)
 
         if len(unacked) == 0 and opcode == 1:
+            if not self.logger.has_logged:
+                self.logger.log()
+                self.logger.has_logged = True
             return False
         else:
             return True

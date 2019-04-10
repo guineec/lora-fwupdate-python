@@ -21,7 +21,7 @@ with open('update_contents.hex') as f:
     if update_length is not None:
         contents = contents[:update_length * 2]
 
-update = KPAdaptedClassB(contents)
+update = KPAdaptedClassB(contents, logger_file="500_class_a_1.txt")
 start_time = time.asctime(time.localtime(time.time()))
 
 
@@ -39,17 +39,6 @@ def on_uplink():
             bytes_to_send = bytes(pkts_as_bytearr)
             return bytes_to_send
         else:
-            print("|---------------- UPDATE FINISHED ----------------|")
-            end_time = time.asctime(time.localtime(time.time()))
-            print("Started: " + start_time)
-            print("Ended: " + end_time)
-            transmitted_total = len(update.update_queue)
-            retransmits = transmitted_total - len(update.update_segments)
-            print("Transmitted: " + str(transmitted_total) + " packets in total.")
-            print("Retransmits: " + str(retransmits) + " packets.")
-            print("Total packet loss percentage: " + str((retransmits / transmitted_total) * 100) + "%")
-            print("Ineffective uplinks: " + str(retransmits + 1))  # First uplink is always ineffective
-            print("|-------------------------------------------------|")
             return ""
 
 

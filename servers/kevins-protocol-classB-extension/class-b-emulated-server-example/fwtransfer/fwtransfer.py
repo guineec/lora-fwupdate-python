@@ -118,7 +118,6 @@ class KPAdaptedClassB:
             unacked = list(set(self.expected_acks) - set(rcvd_acks))
             self.expected_acks = []
             print(unacked)
-
             for ind in unacked:
                 if ind not in self.acks_rcvd:
                     self.nack(ind)

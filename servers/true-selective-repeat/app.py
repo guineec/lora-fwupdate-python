@@ -21,7 +21,7 @@ with open('update_contents.hex') as f:
     if update_length is not None:
         contents = contents[:update_length * 2]
 
-update = TrueSelectiveRepeat(contents, num_rx_windows=20)
+update = TrueSelectiveRepeat(contents, num_rx_windows=5)
 start_time = time.asctime(time.localtime(time.time()))
 
 
@@ -47,7 +47,7 @@ def on_uplink():
             retransmits = update.tx_total - (int(len(update.update_segments) / 20) - 1)
             print("Transmitted: " + str(update.tx_total) + " packets in total.")
             print("Retransmits: " + str(retransmits) + " packets.")
-            print("Total packet loss percentage: " + str((retransmits / update.pkts_sent) * 100) + "%")
+            print("Total packet loss percentage: " + str((retransmits / (update.pkts_sent + 1)) * 100) + "%")
             print("Ineffective uplinks: " + str(retransmits + 1))  # First uplink is always ineffective
             print("|-------------------------------------------------|")
             return ""

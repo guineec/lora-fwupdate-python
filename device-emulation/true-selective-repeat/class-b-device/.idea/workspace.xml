@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23451262-d121-4bfc-988e-73c82f02e76f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../kevins-protocol-classB-extension/class-a-device/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../kevins-protocol-classB-extension/class-a-device/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../kevins-protocol-classB-extension/class-a-device/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../kevins-protocol-classB-extension/class-a-device/node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../kevins-protocol-classB-extension/class-b-device/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../kevins-protocol-classB-extension/class-b-device/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../kevins-protocol-classB-extension/class-b-device/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../kevins-protocol-classB-extension/class-b-device/node.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-a-emulated-server-example/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-a-emulated-server-example/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-a-emulated-server-example/update_contents.hex" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-a-emulated-server-example/update_contents.hex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-b-emulated-server-example/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-b-emulated-server-example/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-b-emulated-server-example/fwtransfer/fwtransfer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-b-emulated-server-example/fwtransfer/fwtransfer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../servers/true-selective-repeat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/true-selective-repeat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../servers/true-selective-repeat/fwtransfer/fwtransfer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/true-selective-repeat/fwtransfer/fwtransfer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../servers/true-selective-repeat/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/true-selective-repeat/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/node.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="89" column="44" lean-forward="true" selection-start-line="89" selection-start-column="44" selection-end-line="89" selection-end-column="44" />
+            <state relative-caret-position="353">
+              <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -122,6 +130,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24954791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -147,12 +156,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/node.py</url>
-          <line>95</line>
+          <line>93</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/node.py</url>
-          <line>58</line>
+          <line>59</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
@@ -189,8 +198,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="89" column="44" lean-forward="true" selection-start-line="89" selection-start-column="44" selection-end-line="89" selection-end-column="44" />
+        <state relative-caret-position="353">
+          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

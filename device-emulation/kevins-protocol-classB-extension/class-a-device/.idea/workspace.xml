@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0e4559f-b20d-4cb5-9ba8-b2e2bd735751" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/node.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../class-b-device/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../class-b-device/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../class-b-device/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/../class-b-device/node.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-a-emulated-server-example/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-a-emulated-server-example/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-a-emulated-server-example/update_contents.hex" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-a-emulated-server-example/update_contents.hex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-b-emulated-server-example/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-b-emulated-server-example/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-b-emulated-server-example/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../servers/kevins-protocol-classB-extension/class-b-emulated-server-example/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/node.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="53" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="558">
+              <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -58,6 +59,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -69,7 +71,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -101,7 +102,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/node.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="&gt; 500-sim.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -125,6 +126,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24954791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -173,8 +175,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="558">
+          <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

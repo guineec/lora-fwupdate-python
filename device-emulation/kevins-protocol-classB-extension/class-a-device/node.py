@@ -2,6 +2,7 @@ import requests
 import time
 import random
 import json
+from logger import Logger
 
 
 class InvalidSpreadingFactorException(Exception):
@@ -22,21 +23,22 @@ class KPAClassADevice:
         self.last_downlink = None
         self.data_str = ""
         self.uplinks = 0
+        self.logger = Logger(output="experiments/2k/sf7/10.json")
         if spreading_factor not in [7, 8, 9, 10, 11, 12]:
             raise InvalidSpreadingFactorException("Spreading factor must be either: 7, 8, 9, 10, 11 or 12")
 
         if spreading_factor == 7:
-            self.drop_chance = 15
+            self.drop_chance = 18
         elif spreading_factor == 8:
-            self.drop_chance = 11
+            self.drop_chance = 14
         elif spreading_factor == 9:
-            self.drop_chance = 24
+            self.drop_chance = 27
         elif spreading_factor == 10:
             self.drop_chance = 40
         elif spreading_factor == 11:
-            self.drop_chance = 6
+            self.drop_chance = 11
         else:
-            self.drop_chance = 9
+            self.drop_chance = 14
 
     def uplink(self):
         self.uplinks += 1
@@ -49,16 +51,19 @@ class KPAClassADevice:
                     ul_data += ind
                 res = requests.post(self.url + "/uplink", data=json.dumps({"hex": ul_data}))
             self.ack_queue = []
-            time.sleep(random.randint(1, 15))  # Simulate a transfer time with some randomness
+            # time.sleep(random.randint(1, 8))  # Simulate a transfer time with some randomness
+            time.sleep(1)
             res_bytes = res.content
             hex_str = res_bytes.hex()
-            new_opcode = hex_str[0]
+            new_opcode = hex_str[0] if len(hex_str) > 0 else '0'
             new_seq_num = hex_str[1:4]
             new_index = hex_str[4:6]
             self.ack_queue.append(new_index)
             self.last_downlink = {"opcode": new_opcode, "seq_num": new_seq_num, "index": new_index}
+            self.logger.uplink_rcvd(new_index)
             return new_opcode is "1"
         else:
+            self.logger.ineffective_uplink()
             self.dropped_packets += 1
             if self.last_downlink:
                 self.last_downlink = {"opcode": self.last_downlink["opcode"], "seq_num": self.last_downlink["seq_num"]}
@@ -81,7 +86,8 @@ class KPAClassADevice:
         is_start = True
         while not self.finished:
             if not is_start:
-                time.sleep(60)
+                # time.sleep(random.randint(60, 128))
+                time.sleep(0)
             is_start = False
             finished = self.uplink()
             self.finished = finished
@@ -96,6 +102,7 @@ class KPAClassADevice:
         print(" DROPS:    " + str(self.dropped_packets))
         print(" EFF ULS:  " + str(self.uplinks - self.dropped_packets))
         print("|---- DEVICE STOPPED ----|")
+        self.logger.write()
 
 
 dev = KPAClassADevice("http://localhost:5000", spreading_factor=12)

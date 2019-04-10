@@ -2,6 +2,7 @@ import requests
 import time
 import random
 import json
+from logger import Logger
 
 
 class InvalidSpreadingFactorException(Exception):
@@ -10,7 +11,7 @@ class InvalidSpreadingFactorException(Exception):
 
 # Kevin's Protocol Adapted
 class KPAClassBDevice:
-    def __init__(self, url, spreading_factor=12, nrx_windows=20):
+    def __init__(self, url, spreading_factor=12, nrx_windows=5):
         self.start_time = 0
         self.end_time = 0
         self.url = url
@@ -22,6 +23,7 @@ class KPAClassBDevice:
         self.data_str = ""
         self.nrx_windows = nrx_windows
         self.uplinks = 0
+        self.logger = Logger(nrx_windows, output="experiments/1k/sf7/10.json")
         if spreading_factor not in [7, 8, 9, 10, 11, 12]:
             raise InvalidSpreadingFactorException("Spreading factor must be either: 7, 8, 9, 10, 11 or 12")
 
@@ -40,6 +42,7 @@ class KPAClassBDevice:
 
     def uplink(self):
         self.uplinks += 1
+        effective = True
         if self.last_downlink is None:
             res = requests.post(self.url + "/uplink", data=json.dumps({"hex": "0000"}))
         else:
@@ -48,13 +51,13 @@ class KPAClassBDevice:
                 ul_data += str(hex(ind))[2:].zfill(2)
             res = requests.post(self.url + "/uplink", data=json.dumps({"hex": ul_data}))
         self.ack_queue = []
-        hex_str = res.content.encode('hex')
+        hex_str = res.content.hex()
         hex_bytes = bytearray.fromhex(hex_str)
         new_seq_num = hex_str[1:4]
         new_opcode = ""
         indices = []
         for i in range(0, len(hex_bytes), 50):
-            time.sleep(random.randint(0, 8))  # Random transmission delay simulated
+            # time.sleep(random.randint(0, 3))  # Random transmission delay simulated
             if i + 50 >= len(hex_bytes) - 1:
                 pkt = hex_bytes[i:]
                 pkt_hex = hex_str[(i * 2):]
@@ -64,6 +67,7 @@ class KPAClassBDevice:
                 if number > self.drop_chance:
                     indices.append(pkt[2])
                 else:
+                    effective = False
                     self.dropped_packets += 1
             else:
                 byte = hex_bytes[i:i + 50]
@@ -74,6 +78,10 @@ class KPAClassBDevice:
                 else:
                     self.dropped_packets += 1
         self.ack_queue = indices
+        if not effective:
+            self.logger.ineffective_uplink()
+        else:
+            self.logger.uplink_rcvd(indices)
         self.last_downlink = {"opcode": new_opcode, "seq_num": new_seq_num, "index": indices}
         return new_opcode is "1"
 
@@ -84,8 +92,8 @@ class KPAClassBDevice:
         print(" SF:       " + str(self.drop_chance) + "% drop likelihood")
         is_start = True
         while True:
-            if not is_start:
-                time.sleep(60 * self.nrx_windows)
+            # time.sleep(random.randint(2, 30) * self.nrx_windows)
+            time.sleep(1)
             is_start = False
             finished = self.uplink()
             if finished:
@@ -94,6 +102,7 @@ class KPAClassBDevice:
                     ul_data += str(hex(ind))[2:].zfill(2)
                 requests.post(self.url + "/uplink", data=json.dumps({"hex": ul_data}))
                 end_time = time.asctime(time.localtime(time.time()))
+                self.logger.write()
                 print(" END TIME: " + end_time)
                 print(" UPLINKS:  " + str(self.uplinks))
                 print(" DROPS:    " + str(self.dropped_packets))
@@ -101,5 +110,5 @@ class KPAClassBDevice:
                 print("|---- UPDATE COMPLETE ----|")
 
 
-dev = KPAClassBDevice("http://localhost:5001", spreading_factor=12, nrx_windows=20)
+dev = KPAClassBDevice("http://localhost:5001", spreading_factor=7, nrx_windows=5)
 dev.run()
