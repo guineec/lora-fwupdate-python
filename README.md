@@ -12,4 +12,3 @@ Servers currently only serve one update to one device and need to be restarted t
   
 ## Device Emulation  
 Several emulated devices of Class A and B designed to accurately reproduce the behaviour of real LoraWAN nodes of the same class. Changeable spreading factor packet loss rate and duty cycle restrictions simulated.  
-As results come in, this section will be updated with comparisons between emulated and real devices.
